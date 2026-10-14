@@ -1,0 +1,36 @@
+{
+  "name": "solucion-primer-parcial-tlp2-soria-maximiliano",
+  "version": "1.0.0",
+  "description": "solucion del primer parcial de TLP2",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch app.js"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/-solucion-primer-parcial-tlp2-Soria-Maximiliano.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaxiSoriaGit/solucion-primer-parcial-tlp2-Soria-Maximiliano/issues"
+  },
+  "homepage": "https://github.com/MaxiSoriaGit/solucion-primer-parcial-tlp2-Soria-Maximiliano#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.0",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

@@ -1,9 +1,9 @@
 // * ARCHIVO A COMPLETAR
-import { UserModel } from "./user.model.js";
-import { ProfileModel } from "./profile.model.js";
-import { ProjectModel } from "./project.model.js";
-import { TechnologyModel } from "./technology.model.js";
-import { ProjectTechnologyModel } from "./project_technology.model.js";
+import { UserModel } from './user.model.js';
+import { ProfileModel } from './profile.model.js';
+import { ProjectModel } from './project.model.js';
+import { TechnologyModel } from './technology.model.js';
+import { ProjectTechnologyModel } from './project_technology.model.js';
 
 // TODO: 1. Definir la relación 1:1 entre User y Profile con los alias profile (en User) y user (en Profile), usando la FK user_id.
 
@@ -12,6 +12,32 @@ import { ProjectTechnologyModel } from "./project_technology.model.js";
 // TODO: 3. Definir la relación N:M entre Project y Technology con los alias technologies y projects, a través de ProjectTechnologyModel y al mismo tiempo configurar la eliminación en cascada para ambos.
 
 // ? Los controladores base de users y technologies ya consultan estas relaciones por alias: deben coincidir.
+// * 1:1 User <-> Profile (FK: user_id, vive en Profile)
+UserModel.hasOne(ProfileModel, { foreignKey: 'user_id', as: 'profile' });
+ProfileModel.belongsTo(UserModel, { foreignKey: 'user_id', as: 'user' });
+
+// * 1:N User -> Project (FK: leader_id, vive en Project)
+UserModel.hasMany(ProjectModel, { foreignKey: 'leader_id', as: 'projects' });
+ProjectModel.belongsTo(UserModel, { foreignKey: 'leader_id', as: 'leader' });
+
+// * N:M Project <-> Technology, a través de ProjectTechnology.
+// * onDelete: "CASCADE" -> al borrar un Project o una Technology
+// * se borran sus filas en la tabla intermedia.
+ProjectModel.belongsToMany(TechnologyModel, {
+  through: ProjectTechnologyModel,
+  foreignKey: 'project_id',
+  otherKey: 'technology_id',
+  as: 'technologies',
+  onDelete: 'CASCADE',
+});
+
+TechnologyModel.belongsToMany(ProjectModel, {
+  through: ProjectTechnologyModel,
+  foreignKey: 'technology_id',
+  otherKey: 'project_id',
+  as: 'projects',
+  onDelete: 'CASCADE',
+});
 
 export {
   UserModel,
